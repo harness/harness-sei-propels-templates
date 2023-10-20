@@ -1,0 +1,508 @@
+{
+    "id": "3dcd1dfd-6840-49b3-a69c-4ce85d5926e3",
+    "permanent_id": "3eb0ff8d-9297-4e61-a52c-a8cfbd67c217",
+    "name": "Meeting Tracker",
+    "description": "/propel meeting PROJECT JIRAUSER \"title string\"",
+    "trigger_type": "component_event",
+    "trigger_template_type": "custom_trigger",
+    "enabled": true,
+    "nodes_dirty": true,
+    "settings": {},
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Custom Trigger - Custom trigger that can be called externally with an API call.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "component_type": {
+                        "key": "component_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "custom",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "custom",
+                        "display_name": "Component Type",
+                        "description": "The component type to match to trigger the playbook",
+                        "content_type": "string",
+                        "index": 0
+                    },
+                    "event_type": {
+                        "key": "event_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "custom_trigger",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "custom_trigger",
+                        "display_name": "Event Type",
+                        "description": "The event type to match to trigger the playbook",
+                        "content_type": "string",
+                        "index": 0
+                    },
+                    "component_name": {
+                        "key": "component_name",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "trigger",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "trigger",
+                        "display_name": "Component Name",
+                        "description": "The component name to match to trigger the playbook",
+                        "content_type": "string",
+                        "index": 0
+                    },
+                    "custom_event": {
+                        "key": "custom_event",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "meeting",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Custom Event",
+                        "description": "Name of custom event",
+                        "content_type": "string",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "component_type": {
+                        "key": "component_type",
+                        "display_name": "Component Type",
+                        "type": "text",
+                        "content_type": "string",
+                        "value_type": "string",
+                        "description": "The component type to match to trigger the playbook",
+                        "options": [],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "default_value": "custom",
+                        "filters": []
+                    },
+                    "custom_event": {
+                        "key": "custom_event",
+                        "display_name": "Custom Event",
+                        "type": "text",
+                        "content_type": "string",
+                        "value_type": "string",
+                        "description": "Name of custom event",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "event_type": {
+                        "key": "event_type",
+                        "display_name": "Event Type",
+                        "type": "text",
+                        "content_type": "string",
+                        "value_type": "string",
+                        "description": "The event type to match to trigger the playbook",
+                        "options": [],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "default_value": "custom_trigger",
+                        "filters": []
+                    },
+                    "component_name": {
+                        "key": "component_name",
+                        "display_name": "Component Name",
+                        "type": "text",
+                        "content_type": "string",
+                        "value_type": "string",
+                        "description": "The component name to match to trigger the playbook",
+                        "options": [],
+                        "required": true,
+                        "hidden": true,
+                        "validation": "",
+                        "default_value": "trigger",
+                        "filters": []
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 50
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Custom Trigger",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "1": {
+                "id": "1",
+                "type": "create_jira_issue",
+                "description": "Create an issue in Jira",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "issue_type_name": {
+                        "key": "issue_type_name",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "Task",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Issue Type",
+                        "description": "Type of the issue in Jira (e.g. \"Task\", case insensitive, but must exist in the chosen project).",
+                        "index": 50
+                    },
+                    "fix_versions": {
+                        "key": "fix_versions",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Fix Versions",
+                        "description": "Comma-separated list of fix versions",
+                        "index": 100
+                    },
+                    "summary": {
+                        "key": "summary",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${0.arg2}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Summary",
+                        "index": 20
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [
+                            {
+                                "value": "68",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Integration",
+                        "index": 10
+                    },
+                    "versions": {
+                        "key": "versions",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Affects Versions",
+                        "description": "Comma-separated list of versions",
+                        "index": 90
+                    },
+                    "custom_fields": {
+                        "key": "custom_fields",
+                        "type": "custom-fields",
+                        "values": [
+                            {
+                                "value": {
+                                    "custom_fields": [
+                                        {
+                                            "key": "customfield_10016",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "integration_id": "68"
+                                },
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Custom Fields",
+                        "index": 110,
+                        "use_input_fields": {
+                            "integration_id": "integration_id"
+                        }
+                    },
+                    "project_key": {
+                        "key": "project_key",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${0.arg0}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Jira Project Key",
+                        "index": 40
+                    },
+                    "description": {
+                        "key": "description",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "Ticket created by Propelo to track a meeting at the request of user ${0.slack_user_name} on Slack.",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Description",
+                        "index": 30
+                    },
+                    "component_names": {
+                        "key": "component_names",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Components",
+                        "description": "Comma-separated list of components",
+                        "index": 80
+                    },
+                    "priority": {
+                        "key": "priority",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Priority",
+                        "description": "Set the priority of the issue. The name of the priority is case sensitive and must match one of the priorities supported by the project and issue type selected.",
+                        "index": 120
+                    },
+                    "assignee_search_string": {
+                        "key": "assignee_search_string",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${0.arg1}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Assignee",
+                        "description": "Find Jira user by name (Jira Cloud), or name and email (Jira Server)",
+                        "index": 60
+                    },
+                    "labels": {
+                        "key": "labels",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "customer_meeting",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Labels",
+                        "description": "Comma-separated list of labels",
+                        "index": 70
+                    }
+                },
+                "output": {
+                    "issue_key": {
+                        "key": "issue_key",
+                        "display_name": "issue_key",
+                        "content_type": "id:integration/jira/issues",
+                        "value_type": "string",
+                        "hidden": false,
+                        "content_schema": {
+                            "key": "9fe5c9bb-fd53-4a25-8f3e-06ff6b1cfd65",
+                            "value_type": "json_blob",
+                            "content_type": "integration/jira/issues",
+                            "fields": {
+                                "key": {
+                                    "key": "key",
+                                    "value_type": "string",
+                                    "content_type": "id:integration/jira/issues"
+                                },
+                                "type": {
+                                    "key": "type",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "labels": {
+                                    "key": "labels",
+                                    "value_type": "json_array",
+                                    "content_type": "string"
+                                },
+                                "status": {
+                                    "key": "status",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "assignee": {
+                                    "key": "assignee",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "priority": {
+                                    "key": "priority",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "reporter": {
+                                    "key": "reporter",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "created_at": {
+                                    "key": "created_at",
+                                    "value_type": "string",
+                                    "content_type": "date"
+                                },
+                                "updated_at": {
+                                    "key": "updated_at",
+                                    "value_type": "string",
+                                    "content_type": "date"
+                                },
+                                "project_key": {
+                                    "key": "project_key",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "fix_versions": {
+                                    "key": "fix_versions",
+                                    "value_type": "json_array",
+                                    "content_type": "string"
+                                },
+                                "custom_fields": {
+                                    "key": "custom_fields",
+                                    "value_type": "json_blob",
+                                    "content_type": "integration/jira/custom_fields"
+                                },
+                                "assignee_email": {
+                                    "key": "assignee_email",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                },
+                                "reporter_email": {
+                                    "key": "reporter_email",
+                                    "value_type": "string",
+                                    "content_type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 328,
+                    "y": 179
+                },
+                "properties": {
+                    "icon": "jira"
+                },
+                "name": "Create Jira Issue",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "929f7e3b-875b-42c4-9b3f-e09c30622fd6": {
+                "id": "929f7e3b-875b-42c4-9b3f-e09c30622fd6",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "1",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,990 @@
+{
+    "id": "51cdd8e4-5e15-4638-9cca-230b8069a567",
+    "permanent_id": "fd832597-c3a8-47a4-a2c2-64c783339000",
+    "name": "Custom Integration - Harness FG",
+    "description": "",
+    "trigger_type": "scheduled",
+    "trigger_template_type": "scheduled",
+    "enabled": true,
+    "nodes_dirty": true,
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Scheduled - Trigger for Propels to run on a specific schedule.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "cron": {
+                        "key": "cron",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "0 19 * * *",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Schedule",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the Propel (the Propel won't run until the cron triggers for the first time).",
+                        "index": 0
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Interval in minutes",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the Propel periodically, starting immediately. Use -1 as a special value to trigger the Propel only once. It will trigger again every time the Propel is updated.",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "cron": {
+                        "key": "cron",
+                        "display_name": "Schedule",
+                        "type": "text",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the Propel (the Propel won't run until the cron triggers for the first time).",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "display_name": "Interval in minutes",
+                        "type": "text",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the Propel periodically, starting immediately. Use -1 as a special value to trigger the Propel only once. It will trigger again every time the Propel is updated.",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 325,
+                    "y": 48
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Scheduled",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "1": {
+                "id": "1",
+                "type": "rest_api",
+                "description": "Make a call to a REST API",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "x-api-key",
+                                    "value": "WldEeDI4bnRSRHlUeFZKODZKWU9Hdzo6RXlJYmxsVW4ySTh4UEdyNkF3VlA0MVg0WEhvZVpDNXBxdGpvSkdkMUJRNnZNUUtTUFRVS3VDWkU1d21kNVpJMXE5djNrVjJRTUxXRVdWM2w="
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, only public APIs can be reached.",
+                        "index": 70
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 50
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"query\": \"query{\\n  executions(limit:500, filters: {startTime: {operator: AFTER, value: ${5.start_ts}},endTime:{operator: BEFORE, value:${5.end_ts}}})\\n    {\\n    nodes{\\n      id\\n      startedAt\\n      endedAt\\n      status\\n      failureDetails\\n      executionUrl\\n      cause{\\n        __typename\\n      }\\n      application{\\n        id\\n        name\\n      }\\n      ... on PipelineExecution {  \\n        status  \\n        pipeline{\\n          name\\n          id\\n          pipelineVariables{\\n            name\\n          }\\n        }\\n\\n      }  \\n    }\\n  }\\n}\\n\",\n    \"variables\": null\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 60
+                    },
+                    "url": {
+                        "key": "url",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "https://app.harness.io/gateway/api/graphql?accountId=ZWDx28ntRDyTxVJ86JYOGw",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "URL",
+                        "description": "URL with parameters",
+                        "index": 20
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 313,
+                    "y": 388
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Get Deployments",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "2": {
+                "id": "2",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "deployments",
+                                    "value": "${1.body}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  var data = JSON.parse(context.getParam(\"deployments\"));\n  \n  // propels.serviceName().doSomething() - invoke a service\n  return { \n    state : 'success',\n    output : { \n      'nodes' : data.data.executions.nodes\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // propels.serviceName().doSomething() - invoke a service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 312,
+                    "y": 510
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Get Deployments list",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "3": {
+                "id": "3",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${2.nodes}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_type": "json_blob"
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 309,
+                    "y": 654
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each deployment",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "4": {
+                "id": "4",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "deployment",
+                                    "value": "${3.item} "
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "jenkins_uuid",
+                                    "value": "06f127a7-f935-4ad1-9309-5917cd0727b1"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "\nfunction replaceAll(str, find, replace) {\n  return str.replace(new RegExp(find, \"g\"), replace);\n}\n\nfunction handleNode(context) {\n  const row = JSON.parse(context.getParam(\"deployment\"));\n  const jenkins_uuid = context.getParam(\"jenkins_uuid\");\n\n  var pipeline_name = row.pipeline && row.pipeline.name? row.pipeline.name: \"\";\n  var job_full_name =  row.application && row.application.name ? row.application.name: \"\";\n  if( row.application && row.application.name && row.pipeline && row.pipeline.name) {\n   job_full_name =  job_full_name + \"/\" + pipeline_name;\n  }\n\n  var date = new Date(row.startedAt);\n  var created_at = new Date(row.startedAt);\n  var ended_at = new Date(row.endedAt);\n\n  var duration = created_at & ended_at? ended_at.getTime() - created_at.getTime(): 0;\n\n  // commits = !commits.message ? commits.map(item => item.sha) : [row.head_commit.id];\n  var start_time = date.getTime();\n  var payload = {};\n  if (row.status) {\n    var triggerName = row.cause[\"__typename\"]? row.cause[\"__typename\"]: \"SCMTrigger\";\n    payload = {\n      job_name: row.application && row.application.name ? row.application.name: \"\",\n      user_id: triggerName,\n      job_run_params: [\n        {\n          type: \"StringParameterValue\",\n          name: \"pipeline_name\",\n          value: row.pipeline && row.pipeline.name? row.pipeline.name : \"\"\n        }\n      ],\n      repo_url: \"\",\n      start_time: start_time,\n      result: row.status,\n      duration: duration,\n      build_number: row.number,\n      jenkins_instance_guid: jenkins_uuid,\n      jenkins_instance_name: \"Jenkins Instance\",\n      jenkins_instance_url: \"https://jenkins.dev.levelops.io/\",\n      job_run: null,\n      job_full_name: job_full_name,\n      job_normalized_full_name: job_full_name,\n      branch_name: \"\",\n      module_name: null,\n      scm_commit_ids: [],\n      trigger_chain: [{\n        id: triggerName,\n        type: \"SCMTriggerCause\"\n      }]\n    };\n  }\n\n  var hasPayload = Object.keys(payload).length > 0;\n\n  // var strp = JSON.stringify(payload).replace(/\"/g, '\\\\\"');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : \"success\",\n    output : { \n      hasPayload : hasPayload,\n      \"cicd\" : {\n        request_type: \"JenkinsPluginJobRunComplete\",\n        payload: JSON.stringify(payload)\n\n      }\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // propels.serviceName().doSomething() - invoke a service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 803
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Map to Generic CICD",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "5": {
+                "id": "5",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "start_ts",
+                                    "value": "${6.start_ts} "
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "end_ts",
+                                    "value": "${6.end_ts} "
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  var start_ts = (parseInt(context.getParam('start_ts'))*1000).toFixed(0);\n  var end_ts = (parseInt(context.getParam('end_ts'))*1000).toFixed(0);\n  // propels.serviceName().doSomething() - invoke a service\n  \n  \n  return { \n    state : 'success',\n    output : { \n      'start_ts' : start_ts,\n      'end_ts' : end_ts\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // propels.serviceName().doSomething() - invoke a service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 313,
+                    "y": 275
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Format Time",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "6": {
+                "id": "6",
+                "type": "get_time_range",
+                "description": "Get the start and end timestamps based on the specified time period",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "truncate": {
+                        "key": "truncate",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Truncate To Day",
+                        "index": 20
+                    },
+                    "time_period": {
+                        "key": "time_period",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "Last_Day",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "Last_Day",
+                            "Last_Week",
+                            "Last_Month",
+                            "Last_Quarter",
+                            "Last_Six_Months",
+                            "Last_Year"
+                        ],
+                        "default_value": "Last_Day",
+                        "display_name": "Time Period",
+                        "description": "Time period to get the start and end timestamps.",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "end_ts": {
+                        "key": "end_ts",
+                        "display_name": "end_ts",
+                        "value_type": "string",
+                        "hidden": false
+                    },
+                    "start_ts": {
+                        "key": "start_ts",
+                        "display_name": "start_ts",
+                        "value_type": "string",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 320,
+                    "y": 164
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Get Time Range In Epoch",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "7": {
+                "id": "7",
+                "type": "levelops_query",
+                "description": "Query the SEI API",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/generic-requests",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "API key to authenticate to SEI.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, only public APIs can be reached.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "${4.cicd}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 303,
+                    "y": 926
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Post to backend",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "0537f0d5-3919-41c9-ae68-d1af1dadc939": {
+                "id": "0537f0d5-3919-41c9-ae68-d1af1dadc939",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "6",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "0f27f59b-a38c-4bbf-ac42-7d02200b58a0": {
+                "id": "0f27f59b-a38c-4bbf-ac42-7d02200b58a0",
+                "from": {
+                    "nodeId": "4",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "7",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "bb849693-a6e0-4f11-a1f8-ed6e35664f64": {
+                "id": "bb849693-a6e0-4f11-a1f8-ed6e35664f64",
+                "from": {
+                    "nodeId": "1",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "2",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "db2386e6-611c-41c3-a18c-c230edaf4e74": {
+                "id": "db2386e6-611c-41c3-a18c-c230edaf4e74",
+                "from": {
+                    "nodeId": "5",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "1",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "e3bb2326-e9bc-4a10-89e8-b8c2afe5d3a3": {
+                "id": "e3bb2326-e9bc-4a10-89e8-b8c2afe5d3a3",
+                "from": {
+                    "nodeId": "2",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "3",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "3020ac6a-9e99-419c-ab19-a06b987b624f": {
+                "id": "3020ac6a-9e99-419c-ab19-a06b987b624f",
+                "from": {
+                    "nodeId": "3",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "4",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "0e909a05-0802-4ced-b629-b6d383d9bead": {
+                "id": "0e909a05-0802-4ced-b629-b6d383d9bead",
+                "from": {
+                    "nodeId": "6",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "5",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}

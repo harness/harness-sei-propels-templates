@@ -1,0 +1,1203 @@
+{
+    "id": "454168bf-09d0-42c4-b48d-181128b9ea94",
+    "permanent_id": "649d4c47-bb48-444f-9359-84044d999e7a",
+    "name": "ADO-Dashboards",
+    "description": "",
+    "trigger_type": "scheduled",
+    "trigger_template_type": "scheduled",
+    "enabled": true,
+    "nodes_dirty": true,
+    "settings": {},
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Scheduled - Trigger for playbooks to run on a specific schedule.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "cron": {
+                        "key": "cron",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Schedule",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "index": 0
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "-1",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Interval in minutes",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "cron": {
+                        "key": "cron",
+                        "display_name": "Schedule",
+                        "type": "text",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "display_name": "Interval in minutes",
+                        "type": "text",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 50
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Scheduled",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "1": {
+                "id": "1",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "integration_ID",
+                                    "value": "103"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "owner_ID",
+                                    "value": "29"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "owner_email",
+                                    "value": "foster@propelo.ai"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "OU_category",
+                                    "value": "4a5c871a-ede1-4a21-afb7-d74abe6988c4"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'integration_ID' : JSON.parse(context.getParam('integration_ID')),\n      'owner_ID' : context.getParam('owner_ID'),\n      'owner_email' : context.getParam('owner_email'),\n      'OU_category' : context.getParam('OU_category'),\n      'story_points' : context.getParam('story_points'),\n      'ac' : context.getParam('ac'),\n      'sprint' : context.getParam('sprint'),\n      'jira_id' : context.getParam('jira_id'),\n      'missing_story_points' : context.getParam('missing_story_points'),\n      'missing_ac' : context.getParam('missing_ac')\n\n\n      \n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 303,
+                    "y": 177
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Parameters",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "2": {
+                "id": "2",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "/v1/dashboards",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"name\": \"DORA Insights\",\n    \"public\": true,\n    \"type\": \"dashboard\",\n    \"query\": {\n        \"integration_ids\": [\n            \"${1.integration_ID}\"\n        ]\n    },\n    \"owner_id\": \"${1.owner_ID}\",\n    \"metadata\": {\n        \"rbac\": {\n            \"owner\": \"${1.owner_email}\",\n            \"users\": {},\n            \"dashboardPermission\": \"admin\"\n        },\n        \"dashboard_time_range\": true,\n        \"dashboard_time_range_filter\": \"last_30_days\",\n        \"effort_investment_profile\": false,\n        \"effort_investment_unit\": false,\n        \"integration_monitoring\": false,\n        \"effort_investment_unit_filter\": \"%_of_engineers\"\n    },\n    \"widgets\": [\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Lead Time Breakdown\",\n            \"type\": \"azure_lead_time_by_stage_report\",\n            \"query\": {\n                \"across\": \"velocity\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"User Story\",\n                    \"Product Backlog Item\"\n                ],\n                \"limit_to_only_applicable_data\": false\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"The amount of time involved from the first commit to getting into production is depicted by splitting into all the involved stages. It helps in identifying the bottlenecks by displaying if each of the stages is in a good, acceptable or slow state as per the threshold defined.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"apply_ou_on_velocity_report\": false,\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Lead Time\",\n            \"type\": \"azure_lead_time_single_stat\",\n            \"query\": {\n                \"calculation\": \"ticket_velocity\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"User Story\",\n                    \"Product Backlog Item\"\n                ]\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 1,\n                    \"workitem_resolved_at\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"apply_ou_on_velocity_report\": false,\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Communication Inefficiencies\",\n            \"type\": \"azure_bounce_report\",\n            \"query\": {\n                \"across\": \"assignee\",\n                \"sort_xaxis\": \"value_high-low\",\n                \"partial_match\": {}\n            },\n            \"old_order\": 4,\n            \"metadata\": {\n                \"order\": 4,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"MTTR\",\n            \"type\": \"azure_lead_time_single_stat\",\n            \"query\": {\n                \"calculation\": \"ticket_velocity\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\"\n                ]\n            },\n            \"old_order\": 4,\n            \"metadata\": {\n                \"order\": 4,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 1,\n                    \"workitem_resolved_at\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"apply_ou_on_velocity_report\": false,\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"MTTR Breakdown\",\n            \"dashboard_id\": \"13\",\n            \"type\": \"azure_lead_time_by_stage_report\",\n            \"query\": {\n                \"across\": \"velocity\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\"\n                ],\n                \"limit_to_only_applicable_data\": false\n            },\n            \"old_order\": 2,\n            \"metadata\": {\n                \"order\": 2,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"The amount of time involved from the first commit to getting into production is depicted by splitting into all the involved stages. It helps in identifying the bottlenecks by displaying if each of the stages is in a good, acceptable or slow state as per the threshold defined.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"apply_ou_on_velocity_report\": false,\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Deployment Frequency\",\n            \"dashboard_id\": \"13\",\n            \"type\": \"jobs_count_single_stat_report\",\n            \"query\": {\n                \"agg_type\": \"total\",\n                \"time_period\": 30\n            },\n            \"old_order\": 5,\n            \"metadata\": {\n                \"order\": 5,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"time_period\": 1\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Failures\",\n            \"dashboard_id\": \"13\",\n            \"type\": \"azure_tickets_counts_stat\",\n            \"query\": {\n                \"across\": \"workitem_created_at\",\n                \"metric\": [\n                    \"ticket\"\n                ],\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\"\n                ],\n                \"workitem_created_at\": {\n                    \"$gt\": \"1664841600\",\n                    \"$lt\": \"1667592192\"\n                }\n            },\n            \"old_order\": 6,\n            \"metadata\": {\n                \"order\": 6,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"stat_time_based\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_created_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"range_filter_choice\": {\n                    \"jira_issue_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 30,\n                                \"unit\": \"days\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM REVIEW COLLABORATION REPORT\",\n            \"type\": \"review_collaboration_report\",\n            \"query\": {\n                \"missing_fields\": {\n                    \"pr_merged\": false\n                }\n            },\n            \"old_order\": 3,\n            \"metadata\": {\n                \"order\": 3,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"This widget helps in understanding how the team is performing the code review amongst its peers. It enables to identify if the team is inclined toward the culture of having a Buddy system, where peers mutually review one another’s code always or if the team is burdened with code reviews only or if the team is practising merging the code without approvals and much more.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"pr_merged_at\": 2,\n                    \"missing_fields\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"pr_merged_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"CICD JOB COUNT TREND REPORT\",\n            \"dashboard_id\": \"13\",\n            \"type\": \"\",\n            \"query\": {},\n            \"old_order\": 5,\n            \"metadata\": {\n                \"order\": 5,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {},\n                \"children\": [\n                ],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"compositegraph\",\n                \"custom_hygienes\": []\n            }\n        },\n        {\n\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Report 1 - CICD Job Count Trend Report\",\n            \"dashboard_id\": \"13\",\n            \"type\": \"jobs_count_trends_report\",\n            \"query\": {\n                \"exclude\": {\n                    \"job_statuses\": [\n                        \"FAILED\"\n                    ]\n                },\n                \"end_time\": {\n                    \"$gt\": \"1656633600\",\n                    \"$lt\": \"1667865599\"\n                },\n                \"interval\": \"week\",\n                \"sort_xaxis\": \"default_old-latest\"\n            },\n            \"old_order\": 0,\n            \"metadata\": {\n                \"order\": 0,\n                \"width\": \"half\",\n                \"hidden\": true,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"end_time\": 1,\n                    \"job_statuses\": 2\n                },\n                \"dashBoard_time_keys\": {},\n                \"range_filter_choice\": {\n                    \"end_time\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": \"2\",\n                                \"unit\": \"quarters\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"isMultiTimeSeriesReport\": false\n            }\n        }\n    ],\n    \"demo\": false,\n    \"category\": [\"${1.OU_category}\"]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 306,
+                    "y": 363
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Create DORA Board",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "3": {
+                "id": "3",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "/v1/dashboards",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"name\": \"Dev Insights\",\n    \"public\": true,\n    \"type\": \"dashboard\",\n    \"query\": {\n        \"integration_ids\": [\n\"${1.integration_ID}\"\n        ]\n    },\n    \"owner_id\": \"${1.owner_ID}\",\n    \"metadata\": {\n        \"rbac\": {\n            \"owner\": \"${1.owner_email}\",\n            \"allUsers\": true,\n            \"dashboardPermission\": \"admin\"\n        },\n        \"dashboard_time_range\": true,\n        \"effort_investment_unit\": false,\n        \"integration_monitoring\": false,\n        \"effort_investment_profile\": false,\n        \"dashboard_time_range_filter\": \"last_30_days\",\n        \"effort_investment_unit_filter\": \"%_of_engineers\"\n    },\n    \"widgets\": [\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM PR LEAD TIME BY STAGE REPORT\",\n            \"type\": \"scm_pr_lead_time_by_stage_report\",\n            \"query\": {\n                \"across\": \"velocity\",\n                \"ratings\": [\n                    \"good\",\n                    \"slow\",\n                    \"needs_attention\"\n                ],\n                \"limit_to_only_applicable_data\": false\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"commit_created\": true,\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"pr_merged_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"pr_merged_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM REVIEW COLLABORATION REPORT\",\n            \"type\": \"review_collaboration_report\",\n            \"query\": {\n                \"missing_fields\": {\n                    \"pr_merged\": false\n                }\n            },\n            \"old_order\": 2,\n            \"metadata\": {\n                \"order\": 2,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"This widget helps in understanding how the team is performing the code review amongst its peers. It enables to identify if the team is inclined toward the culture of having a Buddy system, where peers mutually review one another’s code always or if the team is burdened with code reviews only or if the team is practising merging the code without approvals and much more.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"pr_merged_at\": 2,\n                    \"missing_fields\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"pr_merged_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM REWORK REPORT\",\n            \"type\": \"scm_rework_report\",\n            \"query\": {\n                \"across\": \"author\"\n            },\n            \"old_order\": 3,\n            \"metadata\": {\n                \"order\": 3,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"Refactor the code i.e. rewrite or make modifications to the existing codebase. Legacy refactored lines are the lines of code which is older than 30 days or as defined in the settings. Refactored lines are the latest modifications made to the codebase which is lesser than 30 days.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"committed_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"committed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM CODING DAYS REPORT\",\n            \"type\": \"github_coding_days_report\",\n            \"query\": {\n                \"across\": \"committer\",\n                \"interval\": \"week\",\n                \"sort_xaxis\": \"value_high-low\",\n                \"committed_at\": {\n                    \"$gt\": \"1663977600\",\n                    \"$lt\": \"1664550629\"\n                }\n            },\n            \"old_order\": 4,\n            \"metadata\": {\n                \"order\": 4,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"Average value of all the days where a developer commits code per week for the selected duration.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"committed_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"committed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"PRS Report - Code Density\",\n            \"type\": \"github_prs_report\",\n            \"query\": {\n                \"across\": \"comment_density\"\n            },\n            \"old_order\": 5,\n            \"metadata\": {\n                \"order\": 5,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"Cumulative count of pull requests for each of the repositories for the selected duration.\",\n                \"max_records\": 50,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"pr_created_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"pr_created_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SCM PRS REPORT - Code Change Size\",\n            \"type\": \"github_prs_report\",\n            \"query\": {\n                \"across\": \"code_change\"\n            },\n            \"old_order\": 6,\n            \"metadata\": {\n                \"order\": 6,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"Cumulative count of pull requests for each of the repositories for the selected duration.\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"pr_created_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"pr_created_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                }\n            }\n        }\n    ],\n    \"created_at\": 1664555387,\n    \"demo\": false,\n    \"category\": [\"${1.OU_category}\"]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 304,
+                    "y": 463
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Create Dev Insights",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "4": {
+                "id": "4",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/dashboards",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"name\": \"Sprint Insights\",\n    \"public\": true,\n    \"type\": \"dashboard\",\n    \"query\": {\n        \"integration_ids\": [\n            \"${1.integration_ID}\"\n        ]\n    },\n    \"owner_id\": \"${1.owner_ID}\",\n    \"metadata\": {\n        \"rbac\": {\n            \"owner\": \"${1.owner_email}\",\n            \"users\": {},\n            \"dashboardPermission\": \"admin\"\n        },\n        \"dashboard_time_range\": true,\n        \"effort_investment_unit\": false,\n        \"integration_monitoring\": false,\n        \"effort_investment_profile\": false,\n        \"dashboard_time_range_filter\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799\n        },\n        \"effort_investment_unit_filter\": \"%_of_engineers\"\n    },\n    \"widgets\": [\n        {\n\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Active Iteration Hygiene\",\n\n            \"type\": \"azure_hygiene_report\",\n            \"query\": {\n                \"across\": \"project\",\n                \"hideScore\": false,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Product Backlog Item\",\n                    \"Bug\"\n                ],\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [\n                    \"0\",\n                    \"1\",\n                    \"2\"\n                ],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"azure_iteration\": 1\n                },\n                \"dashBoard_time_keys\": {},\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"SPRINT METRICS TREND REPORT\",\n\n            \"type\": \"azure_sprint_metrics_trend\",\n            \"query\": {\n                \"across\": \"sprint\",\n                \"metric\": [\n                    \"creep_done_points\",\n                    \"commit_done_points\",\n                    \"commit_not_done_points\",\n                    \"creep_not_done_points\"\n                ],\n                \"interval\": \"week\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799\n                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 6,\n            \"metadata\": {\n                \"order\": 6,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"azure_iteration\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Estimate vs Time Spent in Development\",\n\n            \"type\": \"azure_resolution_time_report\",\n            \"query\": {\n                \"across\": \"Microsoft.VSTS.Scheduling.Effort\",\n                \"metric\": [\n                    \"median_resolution_time\",\n                    \"number_of_tickets_closed\"\n                ],\n                \"exclude\": {\n                    \"workitem_stages\": [\n                        \"To Do\",\n                        \"New\",\n                        \"Removed\",\n                        \"Resolved\"\n                    ]\n                },\n                \"sort_xaxis\": \"value_high-low\",\n                \"partial_match\": {},\n                \"workitem_resolved_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                }\n            },\n            \"old_order\": 3,\n            \"metadata\": {\n                \"order\": 3,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_stages\": 2,\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Active Iteration Status\",\n\n            \"type\": \"azure_tickets_report\",\n            \"query\": {\n                \"across\": \"teams\",\n                \"metric\": \"effort\",\n                \"stacks\": [\n                    \"status\"\n                ],\n                \"exclude\": {\n                    \"workitem_status_categories\": [\n                        \"Removed\"\n                    ]\n                },\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Product Backlog Item\",\n                    \"Bug\"\n                ],\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 2,\n            \"metadata\": {\n                \"order\": 2,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"azure_iteration\": 1,\n                    \"workitem_status_categories\": 3\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Commit Done Tickets\",\n\n            \"type\": \"azure_sprint_metrics_single_stat\",\n            \"query\": {\n                \"metric\": \"commit_done_tickets\",\n                \"agg_type\": \"average\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ]\n            },\n            \"old_order\": 2,\n            \"metadata\": {\n                \"order\": 2,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"workitem_types\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Commit Missed Tickets\",\n\n            \"type\": \"azure_sprint_metrics_single_stat\",\n            \"query\": {\n                \"metric\": \"commit_missed_tickets\",\n                \"agg_type\": \"average\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ]\n            },\n            \"old_order\": 3,\n            \"metadata\": {\n                \"order\": 3,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"workitem_types\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Creep Missed Tickets\",\n\n            \"type\": \"azure_sprint_metrics_single_stat\",\n            \"query\": {\n                \"metric\": \"creep_missed_tickets\",\n                \"agg_type\": \"average\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ]\n            },\n            \"old_order\": 5,\n            \"metadata\": {\n                \"order\": 5,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"workitem_types\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Creep Done Tickets\",\n\n            \"type\": \"azure_sprint_metrics_single_stat\",\n            \"query\": {\n                \"metric\": \"creep_done_tickets\",\n                \"agg_type\": \"average\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ]\n            },\n            \"old_order\": 4,\n            \"metadata\": {\n                \"order\": 4,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"workitem_types\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Current Iteration Committed Effort\",\n\n            \"type\": \"azure_tickets_counts_stat\",\n            \"query\": {\n                \"across\": \"workitem_created_at\",\n                \"metric\": \"effort\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ],\n                \"workitem_created_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 7,\n            \"metadata\": {\n                \"order\": 7,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 3,\n                    \"azure_iteration\": 2,\n                    \"stat_time_based\": 1\n                },\n                \"dashBoard_time_keys\": {},\n                \"range_filter_choice\": {\n                    \"workitem_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": \"30\",\n                                \"unit\": \"quarters\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    },\n                    \"jira_issue_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 30,\n                                \"unit\": \"days\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Commit Tickets\",\n\n            \"type\": \"azure_sprint_metrics_single_stat\",\n            \"query\": {\n                \"metric\": \"commit_tickets\",\n                \"agg_type\": \"average\",\n                \"completed_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"creep_buffer\": 86400,\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ]\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"completed_at\": 1,\n                    \"workitem_types\": 2\n                },\n                \"dashBoard_time_keys\": {\n                    \"completed_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Current Iteration Completed Effort\",\n\n            \"type\": \"azure_tickets_counts_stat\",\n            \"query\": {\n                \"across\": \"workitem_created_at\",\n                \"metric\": \"effort\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ],\n                \"workitem_created_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ],\n                \"workitem_status_categories\": [\n                    \"Completed\"\n                ]\n            },\n            \"old_order\": 6,\n            \"metadata\": {\n                \"order\": 6,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 4,\n                    \"azure_iteration\": 2,\n                    \"stat_time_based\": 1,\n                    \"workitem_status_categories\": 3\n                },\n                \"dashBoard_time_keys\": {},\n                \"range_filter_choice\": {\n                    \"workitem_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": \"30\",\n                                \"unit\": \"quarters\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    },\n                    \"jira_issue_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 30,\n                                \"unit\": \"days\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Current Iteration Pending Effort\",\n\n            \"type\": \"azure_tickets_counts_stat\",\n            \"query\": {\n                \"across\": \"workitem_created_at\",\n                \"metric\": \"effort\",\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\",\n                    \"User Story\"\n                ],\n                \"workitem_created_at\": {\n            \"$gt\": 1665792000,\n            \"$lt\": 1667692799                },\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ],\n                \"workitem_status_categories\": [\n                    \"InProgress\"\n                ]\n            },\n            \"old_order\": 12,\n            \"metadata\": {\n                \"order\": 12,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 4,\n                    \"azure_iteration\": 2,\n                    \"stat_time_based\": 1,\n                    \"workitem_status_categories\": 3\n                },\n                \"dashBoard_time_keys\": {},\n                \"range_filter_choice\": {\n                    \"workitem_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": \"30\",\n                                \"unit\": \"quarters\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    },\n                    \"jira_issue_created_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 30,\n                                \"unit\": \"days\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Issue Status by Team\",\n\n            \"type\": \"azure_tickets_report\",\n            \"query\": {\n                \"across\": \"teams\",\n                \"metric\": \"ticket\",\n                \"stacks\": [\n                    \"status\"\n                ],\n                \"exclude\": {\n                    \"workitem_status_categories\": [\n                        \"Completed\",\n                        \"Removed\"\n                    ]\n                },\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\"\n                ],\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 4,\n            \"metadata\": {\n                \"order\": 4,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 3,\n                    \"azure_iteration\": 2,\n                    \"workitem_status_categories\": 1\n                },\n                \"dashBoard_time_keys\": {},\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Backlog Trend Report\",\n            \"type\": \"azure_backlog_trend_report\",\n            \"query\": {\n                \"across\": \"trend\",\n                \"exclude\": {\n                    \"workitem_status_categories\": [\n                        \"Removed\"\n                    ]\n                },\n                \"interval\": \"week\",\n                \"sort_xaxis\": \"default_old-latest\",\n                \"partial_match\": {},\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 5,\n            \"metadata\": {\n                \"order\": 5,\n                \"width\": \"half\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"leftYAxis\": \"total_tickets\",\n                \"rightYAxis\": \"median\",\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"interval\": 1,\n                    \"azure_iteration\": 2,\n                    \"workitem_status_categories\": 3\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Issue Status by Environment\",\n            \"type\": \"azure_tickets_report\",\n            \"query\": {\n                \"across\": \"teams\",\n                \"metric\": \"ticket\",\n                \"stacks\": [\n                    \"status\"\n                ],\n                \"exclude\": {\n                    \"workitem_status_categories\": [\n                        \"Completed\",\n                        \"Removed\"\n                    ]\n                },\n                \"partial_match\": {},\n                \"workitem_types\": [\n                    \"Bug\",\n                    \"Product Backlog Item\"\n                ],\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 15,\n            \"metadata\": {\n                \"order\": 15,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {                    \"IDLE\": 2,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 10,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8,\n                    \"0\": 10,\n                    \"1\": 20,\n                    \"2\":10\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 3,\n                    \"azure_iteration\": 2,\n                    \"workitem_status_categories\": 1\n                },\n                \"dashBoard_time_keys\": {},\n                \"disable_issue_management_system\": true\n            }\n        }\n    ],\n    \"demo\": false,\n    \"category\": [\"${1.OU_category}\"]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 293,
+                    "y": 555
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Create Sprint Insights",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "5": {
+                "id": "5",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/dashboards",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"name\": \"Alignment Overview\",\n    \"public\": true,\n    \"type\": \"dashboard\",\n    \"query\": {\n        \"integration_ids\": [\n            \"${1.integration_ID}\"\n        ]\n    },\n    \"owner_id\": \"${1.owner_ID}\",\n    \"metadata\": {\n        \"rbac\": {\n            \"owner\": \"${1.owner_email}\",\n            \"users\": {},\n            \"dashboardPermission\": \"admin\"\n        },\n        \"dashboard_time_range\": true,\n        \"effort_investment_profile\": true,\n        \"dashboard_time_range_filter\": {\n            \"$gt\": 1664582400,\n            \"$lt\": 1669852799\n        },\n        \"effort_investment_unit\": false,\n        \"integration_monitoring\": false,\n        \"effort_investment_unit_filter\": \"%_of_engineers\"\n    },\n    \"widgets\": [\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"ISSUES REPORT\",\n            \"dashboard_id\": \"12\",\n            \"type\": \"azure_tickets_report\",\n            \"query\": {\n                \"across\": \"assignee\",\n                \"metric\": [\n                    \"ticket\"\n                ],\n                \"partial_match\": {},\n                \"workitem_sprint_states\": [\n                    \"current\"\n                ]\n            },\n            \"old_order\": 6,\n            \"metadata\": {\n                \"order\": 6,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"azure_iteration\": 1\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Business Alignment\",\n            \"dashboard_id\": \"12\",\n            \"type\": \"azure_effort_investment_single_stat\",\n            \"query\": {\n                \"partial_match\": {},\n                \"workitem_types\": [],\n                \"workitem_resolved_at\": {\n                    \"$gt\": \"1656892800\",\n                    \"$lt\": \"1667589269\"\n                }\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"stats\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"range_filter_choice\": {\n                    \"committed_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 4,\n                                \"unit\": \"months\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    },\n                    \"workitem_resolved_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 4,\n                                \"unit\": \"months\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        },\n        {\n            \"deleting\": false,\n            \"deleted\": false,\n            \"updated\": false,\n            \"updating\": false,\n            \"loading\": false,\n            \"loaded\": false,\n            \"creating\": false,\n            \"created\": false,\n            \"error\": null,\n            \"name\": \"Business Alignment Overview\",\n            \"dashboard_id\": \"12\",\n            \"type\": \"azure_effort_investment_trend_report\",\n            \"query\": {\n                \"interval\": \"biweekly\",\n                \"partial_match\": {},\n                \"workitem_types\": [],\n                \"active_work_unit\": \"active_azure_ei_ticket_count\",\n                \"workitem_resolved_at\": {\n                    \"$gt\": \"1656892800\",\n                    \"$lt\": \"1667589269\"\n                }\n            },\n            \"old_order\": 1,\n            \"metadata\": {\n                \"order\": 1,\n                \"width\": \"full\",\n                \"hidden\": false,\n                \"weights\": {\n                    \"IDLE\": 20,\n                    \"NO_ASSIGNEE\": 20,\n                    \"NO_DUE_DATE\": 30,\n                    \"NO_COMPONENTS\": 20,\n                    \"POOR_DESCRIPTION\": 8\n                },\n                \"children\": [],\n                \"description\": \"\",\n                \"max_records\": 20,\n                \"widget_type\": \"graph\",\n                \"default_value\": \"azure_devops\",\n                \"custom_hygienes\": [],\n                \"filter_tab_order\": {\n                    \"workitem_types\": 2,\n                    \"workitem_resolved_at\": 1\n                },\n                \"dashBoard_time_keys\": {\n                    \"workitem_resolved_at\": {\n                        \"use_dashboard_time\": true\n                    }\n                },\n                \"range_filter_choice\": {\n                    \"committed_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 4,\n                                \"unit\": \"months\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    },\n                    \"workitem_resolved_at\": {\n                        \"type\": \"relative\",\n                        \"relative\": {\n                            \"last\": {\n                                \"num\": 4,\n                                \"unit\": \"months\"\n                            },\n                            \"next\": {\n                                \"unit\": \"today\"\n                            }\n                        }\n                    }\n                },\n                \"disable_issue_management_system\": true\n            }\n        }\n\n        \n    ],\n    \"created_at\": 1667588248,\n    \"demo\": false,\n    \"category\": [\"${1.OU_category}\"]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 297,
+                    "y": 679
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Create BA",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "6": {
+                "id": "6",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "/v1/integration_configs",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"integration_id\": \"${1.integration_ID}\",\n    \"custom_hygienes\": [\n        {\n           \"id\":\"0\",\n            \"name\": \"Large Story\",\n            \"missing_fields\": {},\n            \"filter\": {\n                \"workitem_story_points\": {\n                    \"$gt\": \"5\"\n                }\n            }\n        },\n        {\n           \"id\":\"1\",\n            \"name\": \"Missing Story Points\",\n            \"missing_fields\": {\n                \"workitem_story_points\": true\n            },\n            \"filter\": {}\n        },\n        {\n           \"id\": \"2\",\n            \"name\": \"Missing Acceptance Criteria\",\n            \"missing_fields\": {\n                \"acceptance_criteria\": true\n            },\n            \"filter\": {}\n        }\n    ],\n    \"config\": {\n        \"agg_custom_fields\": []\n    }\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 688,
+                    "y": 248
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Levelops Query",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "c1de97c6-d815-4429-b402-e17fbb24f3f3": {
+                "id": "c1de97c6-d815-4429-b402-e17fbb24f3f3",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "1",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "d4d3eed4-10e9-4754-812c-5a40004a3b25": {
+                "id": "d4d3eed4-10e9-4754-812c-5a40004a3b25",
+                "from": {
+                    "nodeId": "6",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "2",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "915c825b-71d9-464c-9a8b-de81d2d32560": {
+                "id": "915c825b-71d9-464c-9a8b-de81d2d32560",
+                "from": {
+                    "nodeId": "1",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "6",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "6679b3e2-ee5f-4d5c-9edc-b029214f1a27": {
+                "id": "6679b3e2-ee5f-4d5c-9edc-b029214f1a27",
+                "from": {
+                    "nodeId": "4",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "5",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "46e20244-2399-4c0a-b69d-6efef8ce9acc": {
+                "id": "46e20244-2399-4c0a-b69d-6efef8ce9acc",
+                "from": {
+                    "nodeId": "2",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "3",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "7ece3610-3956-4d0f-a953-bd98fe9525ef": {
+                "id": "7ece3610-3956-4d0f-a953-bd98fe9525ef",
+                "from": {
+                    "nodeId": "3",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "4",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}

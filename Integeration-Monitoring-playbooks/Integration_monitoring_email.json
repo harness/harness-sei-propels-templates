@@ -1,0 +1,193 @@
+{
+    "id": "04a731f0-5037-47bc-b947-f44b0eaa4052",
+    "permanent_id": "76c302c5-bab9-4a12-b9b1-cd20cc7afb67",
+    "name": "Integration_monitoring_email",
+    "description": "Integration_monitoring_email",
+    "trigger_type": "scheduled",
+    "trigger_template_type": "scheduled",
+    "enabled": false,
+    "nodes_dirty": true,
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Scheduled - Trigger for playbooks to run on a specific schedule.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "cron": {
+                        "key": "cron",
+                        "type": "text",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Schedule",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "index": 0
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "-1",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Interval in minutes",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "cron": {
+                        "key": "cron",
+                        "display_name": "Schedule",
+                        "type": "text",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "display_name": "Interval in minutes",
+                        "type": "text",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 50
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Scheduled",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "2": {
+                "id": "2",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  \n//read table\n statusMsg =  levelops.tables().query('Integration_Monitoring');\n  //To conslidate message\n  processedMsg = 'Hello, please see integration log status below <br/><br/>';\n  //processedMsg = '<table border=\"1\"><tr><th>ID</th><th>Type</th><th>Name</th><th>Status</th><th>Error Message</th><th>Error Details</th></tr>';\n  \n  processedMsg = processedMsg + '<table border=\"1\"><tr><th>ID</th><th>Type</th><th>Name</th><th>Status</th><th>Error Message</th><th>Error Details</th></tr>';\n\n var jsonData = JSON.parse(statusMsg);\n\n  for (var i = 0; i < jsonData.length; i++) {\n    var myData = jsonData[i];\n    if(myData.integration_status==\"failed\"){\n    \n    //processedMsg  = processedMsg  + myData.integration_id +\" | \"+ myData.integration_name +\" | \"+ myData.integration_type +\" | \"+ myData.integration_status + \" | \"+ myData.integration_message +  \" | \"+ myData.integration_stacktrace+\"\\n\";\n    processedMsg  = processedMsg +\"<tr><td>\"+ myData.integration_id +\"</td><td>\"+ myData.integration_name +\"</td><td>\"+ myData.integration_type +\"</td><td>\"+ myData.integration_status +\"</td><td>\"+ myData.integration_message +\"</td><td>\"+ myData.integration_stacktrace+\"</td></tr>\";\n  }\n  }\n   processedMsg = processedMsg + '</table>';\n  \nlevelops.emails().send('Integration Status Logs', ''+processedMsg,['aranjyothi@levelops.io']);\n\n  \n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : processedMsg  \n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 304,
+                    "y": 279
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Custom Script",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "090749f1-2de0-4f84-9b67-b1ed6975a26e": {
+                "id": "090749f1-2de0-4f84-9b67-b1ed6975a26e",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "2",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}
