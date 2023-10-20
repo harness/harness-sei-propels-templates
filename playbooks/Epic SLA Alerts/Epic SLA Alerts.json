@@ -1,0 +1,1467 @@
+{
+    "id": "6cef4ce9-2d05-4b81-9340-f590e4fc48ec",
+    "permanent_id": "d2903233-9a9c-464b-805e-17220ce99e4e",
+    "name": "Epic SLA Alerts",
+    "description": "",
+    "trigger_type": "scheduled",
+    "trigger_template_type": "scheduled",
+    "enabled": true,
+    "nodes_dirty": true,
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Scheduled - Trigger for playbooks to run on a specific schedule.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "cron": {
+                        "key": "cron",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "0 6 * * 3,5",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Schedule",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "index": 0
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Interval in minutes",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "cron": {
+                        "key": "cron",
+                        "display_name": "Schedule",
+                        "type": "text",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "display_name": "Interval in minutes",
+                        "type": "text",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 299,
+                    "y": 21
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Scheduled",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "3": {
+                "id": "3",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/jira_issues/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"filter\": {\n        \"product_id\": \"${16.product_id}\",\n        \"integration_ids\": ${16.integration_ids},\n        \"issue_types\": [\n            \"STORY\", \"TASK\"\n        ],\n        \"epics\": [\n            \"${14.item.key}\"\n        ]\n    }\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 299,
+                    "y": 807
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "EPIC story details",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "4": {
+                "id": "4",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "epicDetails",
+                                    "value": "${3.json_body}"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "epic_metadata",
+                                    "value": "${14.item}"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "estimate_field",
+                                    "value": "${16.estimate_field}"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "startDate_field",
+                                    "value": "${16.startDate_field}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  var epicStoryDetails = JSON.parse(context.getParam('epicDetails')).records;\n  var epicmetadata = JSON.parse(context.getParam('epic_metadata'));\n  var estimate_field = context.getParam('estimate_field');\n  var startDate_field = context.getParam('startDate_field');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  var story_open = [];\n  var sp_completed = 0; // story open/completed, no story points\n\n  epicStoryDetails.forEach(function (task) {\n    if (task.status && task.status === \"CLOSED\") {\n      var status = task.status_list.filter(sts => sts.status === \"CLOSED\");\n      if (status.length > 0) {\n        sp_completed += 1;\n      }\n    } else {\n      story_open.push({\n        \"0\": task.key,\n        \"1\": task.summary\n      });\n    }\n\n  });\n\n  const estimate = parseInt(epicmetadata.custom_fields[estimate_field] || \"0\");\n  var startTime = (epicmetadata.custom_fields && epicmetadata.custom_fields[startDate_field]) ? (epicmetadata.custom_fields[startDate_field] / 1000).toFixed() : epicmetadata.issue_created_at;\n  var due_date = new Date((parseInt(startTime) + estimate * 604800) * 1000).toLocaleDateString();\n\n  var percent_completed = sp_completed > 0 ? ((sp_completed / (epicStoryDetails.length)) * 100).toFixed(0) : 0;\n  var epic_due_date = Date.parse(due_date) / 1000;\n  var today = Date.now() / 1000;\n  var days_remaining = epic_due_date > today ? (epic_due_date - today) / 86400 : 0;\n  var weeks_remaining = (days_remaining / 7).toFixed(1);\n  var color = \"Green\";\n  var week_rem = Math.floor(weeks_remaining);\n  if (estimate > 0 && weeks_remaining < estimate / 2) {\n    switch (week_rem) {\n      case 0:\n        if (percent_completed < 100) {\n          color = \"Red\";\n        }\n        break;\n      case 1:\n        if (percent_completed <= 60) {\n          color = \"Red\";\n        }\n        break;\n      case 2:\n        if (percent_completed >= 40 && percent_completed < 60) {\n          color = \"Yellow\";\n        } else if (percent_completed < 40) {\n          color = \"Red\";\n        }\n        break;\n      case 3:\n        if (percent_completed < 40) {\n          color = \"Red\";\n        }\n        break;\n      default:\n    }\n  }\n\n  var epicJIRAStatus = \"OPEN\";\n  epicmetadata.status_list.forEach(function (status) {\n    if (status.status === \"CLOSED\" || status.status === \"DONE\") {\n      epicJIRAStatus = status.status;\n    }\n  });\n\n  var half_estimate = Math.floor(estimate / 2);\n\n  var sendMail = false;\n  if (color === 'Green' && (week_rem === half_estimate || week_rem === 1)) {\n    sendMail = true;\n  } else if ((color === 'Red' || color === 'Yellow') && (week_rem === half_estimate || week_rem < 3)) {\n    sendMail = true;\n  }\n\n  var message = \"<div>\";\n\n  var addTableRow = function (vals, isHeader = false) {\n    var rowHtml = '<tr>';\n    vals.forEach(val => {\n      rowHtml += (isHeader ? '<th>' : '<td>') + val + (isHeader ? '</th>' : '</td>');\n    });\n    rowHtml += '</tr>';\n    message += rowHtml;\n  };\n  message += \"<h3>\" + epicmetadata.key + \": \" + epicmetadata.summary + \"</h3>\";\n\n  message += \"<p>Current Progress</p>\";\n  message += '<table border=1 cellpadding=5 style=\"border-collapse: collapse; \">';\n\n  addTableRow([\"Percent Completed\", percent_completed]);\n  addTableRow([\"Stories Completed\", sp_completed + \"/\" + epicStoryDetails.length]);\n  addTableRow([\"Stories Open\", (epicStoryDetails.length - sp_completed) + \"/\" + epicStoryDetails.length]);\n  addTableRow([\"Weeks Estimated\", estimate]);\n  addTableRow([\"Due Date\", due_date]);\n  addTableRow([\"Current Status\", epicJIRAStatus]);\n  addTableRow([\"Weeks Remaining\", weeks_remaining]);\n  addTableRow([\"Projected SLA Status\", color]);\n\n  message += \"</table>\";\n  message += \"<br>\";\n  if (story_open.length > 0) {\n    message += \"<h4>Stories Open</h4>\";\n    story_open.forEach(function (story) {\n      message += \"<p>\" + story[\"0\"] + \": \" + story[\"1\"] + \"</p>\";\n    });\n  } else {\n    message += \"<p>No OPEN Stories</p>\";\n  }\n  message += \"<br>\";\n  var note = `How is above status calculated?\n- Once the middle of epic progress is arrived, the percent completed is calculated.\n- The percentage completion uses story completed as the basis of calculation.\n- Completion between 40% - 60% (2 weeks remaining) - Yellow\n- Completion less than 40% (less than 3 weeks remaining), Completion below 100% (less than one week remaining) - Red\n- Otherwise it's marked Green\n`;\n\n  message += note;\n  message += \"</div>\";\n  //if(sendMail) {\n  //  levelops.emails().send(\"EPIC SLA Tracker:\" + epicmetadata.epic, message, \"shashank@propelo.ai\");\n  //}\n\n  return {\n    state: 'success',\n    output: {\n      'subject': \"EPIC SLA Tracker:\" + epicmetadata.key,\n      'message': message\n    }\n  };\n\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 906
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Status message",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "7": {
+                "id": "7",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${8.json_body.records}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_schema": {}
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 301,
+                    "y": 444
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each OU",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "8": {
+                "id": "8",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/org/units/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\"page\":0,\"page_size\":50,\"filter\":{}}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 340
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "List OUs",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "9": {
+                "id": "9",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "ou",
+                                    "value": "${7.item}"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "tags",
+                                    "value": "${11.json_body}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "\nfunction handleNode(context) {\n  var ou = JSON.parse(context.getParam('ou'));\n  var tags = JSON.parse(context.getParam('tags')).records;\n  var tagsMap = {};\n  var emails = [];\n  tags.forEach(function(tag){\n    tagsMap[tag.id] = tag.name;\n  });\n  \n  ou.managers.forEach(function(manager){\n    if(emails.indexOf(manager.email) < 0) {\n      emails.push(manager.email);\n    }\n  });\n  \n  ou.tags.forEach(function(tagid){\n    if(emails.indexOf(tagsMap[tagid]) < 0 && tagsMap[tagid].indexOf('@') > 0) {\n      emails.push(tagsMap[tagid]);\n    }\n  });\n  \n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      emails: emails \n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 299,
+                    "y": 1010
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Format Email",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "10": {
+                "id": "10",
+                "type": "email_notification",
+                "description": "Send an Email to a user",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "user_email": {
+                        "key": "user_email",
+                        "type": "multi-custom-dynamic-select",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "users",
+                        "search_field": "email",
+                        "display_name": "User Emails",
+                        "description": "Emails of the recipients. Select from the list, or use a variable (it may contain one or more emails, separated by commas).",
+                        "index": 10
+                    },
+                    "subject": {
+                        "key": "subject",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${4.subject}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Subject",
+                        "index": 20
+                    },
+                    "text": {
+                        "key": "text",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "${4.message}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "text",
+                        "description": "Text message to send",
+                        "index": 30
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 298,
+                    "y": 1219
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Send Email notification",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "11": {
+                "id": "11",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/tags/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\"filter\":{}}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 233
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Get Tags",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "12": {
+                "id": "12",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${9.emails}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_type": "json_blob"
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 295,
+                    "y": 1110
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each Item In List",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "14": {
+                "id": "14",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${15.json_body.records}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_schema": {}
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 655
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each Item In List",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "15": {
+                "id": "15",
+                "type": "jira_list",
+                "description": "List the Jira Issues based on the filter",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 30
+                    },
+                    "api_key": {
+                        "key": "api_key",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach PRs List API.",
+                        "index": 20
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"page\": 0,\n    \"page_size\": 500,\n    \"filter\": {\n        \"metric\": \"ticket\",\n         \"statuses\": [\"IN PROGRESS\"],\n        \"issue_types\": [\n            \"EPIC\"\n        ],\n        \"visualization\": \"bar_chart\",\n        \"product_id\": \"${16.product_id}\",\n        \"integration_ids\": ${16.integration_ids}\n    },\n    \"ou_ids\": [\"${7.item.id}\"],\n    \"ou_user_filter_designation\": {\n        \"sprint\": [\n            \"${16.sprint_field}\"\n        ]\n    },\n    \"ou_exclusions\": [\n        \"${16.estimate_field}\"\n    ]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 553
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Epics List",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "16": {
+                "id": "16",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n\t  \"product_id\": \"1\",\n      \"integration_ids\": [\"1\"],\n      \"sprint_field\": \"customfield_10021\",\n      \"estimate_field\": \"customfield_10016\",\n      \"startDate_field\": \"customfield_10015\"\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 298,
+                    "y": 128
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Parameters",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "0108399c-9bac-46a9-b284-e087c4334c95": {
+                "id": "0108399c-9bac-46a9-b284-e087c4334c95",
+                "from": {
+                    "nodeId": "11",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "8",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "1f3ff450-d2d6-459e-a68c-af220457a1c5": {
+                "id": "1f3ff450-d2d6-459e-a68c-af220457a1c5",
+                "from": {
+                    "nodeId": "4",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "9",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "80b6f828-f49a-4f8c-afb2-35db7be0dd03": {
+                "id": "80b6f828-f49a-4f8c-afb2-35db7be0dd03",
+                "from": {
+                    "nodeId": "8",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "7",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "e7d64d32-6960-45a1-83b3-1705686492a1": {
+                "id": "e7d64d32-6960-45a1-83b3-1705686492a1",
+                "from": {
+                    "nodeId": "3",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "4",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "4e9147ef-861b-4a71-a0af-3e5c63c3cbb3": {
+                "id": "4e9147ef-861b-4a71-a0af-3e5c63c3cbb3",
+                "from": {
+                    "nodeId": "9",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "12",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "18c52e60-5576-4492-8f0d-d824d9df7c60": {
+                "id": "18c52e60-5576-4492-8f0d-d824d9df7c60",
+                "from": {
+                    "nodeId": "7",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "15",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "eed2894b-3b0b-46d6-a8f0-6823d4c681fc": {
+                "id": "eed2894b-3b0b-46d6-a8f0-6823d4c681fc",
+                "from": {
+                    "nodeId": "16",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "11",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "ce0b56d1-aaa2-401d-b6c9-01ca53cba085": {
+                "id": "ce0b56d1-aaa2-401d-b6c9-01ca53cba085",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "16",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "ed275b9b-5892-4a92-8541-85fc07b71371": {
+                "id": "ed275b9b-5892-4a92-8541-85fc07b71371",
+                "from": {
+                    "nodeId": "12",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "10",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "baf9977e-767a-4a9e-8459-c31b02b70e87": {
+                "id": "baf9977e-767a-4a9e-8459-c31b02b70e87",
+                "from": {
+                    "nodeId": "15",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "14",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "0f5e28f4-5017-4282-8d20-a8eb880a8b4a": {
+                "id": "0f5e28f4-5017-4282-8d20-a8eb880a8b4a",
+                "from": {
+                    "nodeId": "14",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "3",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}

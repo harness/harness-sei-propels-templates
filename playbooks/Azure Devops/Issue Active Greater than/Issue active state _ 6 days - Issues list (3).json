@@ -1,0 +1,1430 @@
+{
+    "id": "e5366030-935f-44c3-9bfa-758823090414",
+    "permanent_id": "10b00b3f-4509-4e35-965b-0b06ec467673",
+    "name": "Issue active state > 6 days - Issues list",
+    "description": "",
+    "trigger_type": "scheduled",
+    "trigger_template_type": "scheduled",
+    "enabled": true,
+    "nodes_dirty": true,
+    "ui_data": {
+        "nodes": {
+            "0": {
+                "id": "0",
+                "type": "trigger",
+                "description": "Scheduled - Trigger for playbooks to run on a specific schedule.",
+                "ports": {
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "cron": {
+                        "key": "cron",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "30 20 * * MON",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Schedule",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "index": 0
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "options": [],
+                        "default_value": "",
+                        "display_name": "Interval in minutes",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "index": 0
+                    }
+                },
+                "output": {
+                    "cron": {
+                        "key": "cron",
+                        "display_name": "Schedule",
+                        "type": "text",
+                        "description": "Specify a schedule using the UNIX cron format to trigger the playbook (the playbook won't run until the cron triggers for the first time).",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    },
+                    "interval_in_min": {
+                        "key": "interval_in_min",
+                        "display_name": "Interval in minutes",
+                        "type": "text",
+                        "description": "If Schedule is not specified, choose an interval in minutes to trigger the playbook periodically, starting immediately. Use -1 as a special value to trigger the playbook only once. It will trigger again every time the playbook is updated.",
+                        "options": [],
+                        "required": false,
+                        "hidden": false,
+                        "validation": "",
+                        "default_value": ""
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 51
+                },
+                "properties": {
+                    "icon": "clock-circle"
+                },
+                "name": "Scheduled",
+                "trigger_type": {
+                    "label": "manual",
+                    "key": "manual"
+                },
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "1": {
+                "id": "1",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/org/units/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\"page\":0,\"page_size\":150,\"filter\":{\"ou_category_id\":[\"8cc52459-0876-4d68-bb51-6b4e1d1d75de\"]}}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 260
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "get org units",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "2": {
+                "id": "2",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 304,
+                    "y": 153
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Params",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "3": {
+                "id": "3",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${1.json_body.records}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_schema": {}
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 300,
+                    "y": 367
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each Org Unit",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "4": {
+                "id": "4",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/issue_mgmt/workitems/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\n    \"page\": 0,\n    \"page_size\": 25,\n    \"filter\": {\n        \"metric\": \"ticket\",\n        \"workitem_types\": [\n            \"User Story\"\n        ],\n        \"workitem_statuses\": [\n            \"Active\"\n        ],\n        \"workitem_created_at\": {\n            \"$gt\": \"1621728000\",\n            \"$lt\": \"1664927999\"\n        },\n        \"integration_ids\": [\n            \"1\"\n        ]\n    },\n    \"across\": \"workitem_type\",\n    \"ou_ids\": [\n        \"18\"\n    ],\n    \"ou_user_filter_designation\": {\n        \"sprint\": [\n            \"sprint_report\"\n        ]\n    },\n    \"ou_exclusions\": [\n        \"workitem_types\"\n    ]\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 299,
+                    "y": 663
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Get Issues",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "5": {
+                "id": "5",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "issues",
+                                    "value": "${4.json_body.records}"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "threshold",
+                                    "value": "6"
+                                },
+                                "type": "json"
+                            },
+                            {
+                                "value": {
+                                    "key": "org_unit",
+                                    "value": "${3.item}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  var issues = JSON.parse(context.getParam('issues'));\n    var org_unit = JSON.parse(context.getParam('org_unit'));\n  var threshold = context.getParam('threshold');\n  var time = threshold * 86400;\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  \n var message = \"\"; \n\n  var addTableRow = function (vals, isHeader = false) {\n    var rowHtml = '<tr>';\n    vals.forEach(val => {\n      rowHtml += (isHeader ? '<th>' : '<td>') + val + (isHeader ? '</th>' : '</td>');\n    });\n    rowHtml += '</tr>';\n    message += rowHtml;\n  };\n  var base_url = \"https://dev.azure.com/eysbp/eysbp/CTP - Core Platform/_workitems/edit/\";\n  var hasRows = true;\n  issues.forEach(function(issue){\n    var active = issue.status_list.filter(function(status){\n      return status.field_value === \"Active\";\n    });\n    var active_time = active[0] && active[0].end_date - active[0].start_date > 0 ? active[0].end_date - active[0].start_date: 0;\n  \tif(active_time >= (6*86400000) && active_time < (15*86400000)) {\n      \n      var url = \"<a href='\"+ base_url+issue.workitem_id +\"'>\"+ issue.workitem_id + \"</a>\";\n      if(hasRows) {\n        message += '<h3>User Stories - Active > 6 days</h3>';\n  \t\tmessage += '<table border=1 cellpadding=5 style=\"border-collapse: collapse; \">';\n  \t\taddTableRow([\"Id\", \"Title\", \"Active Days\", \"Assignee\", \"Labels\"], true);\n        hasRows = false;\n      }\n      addTableRow([url, issue.summary, (active_time/86400000).toFixed(1) + \" days\", issue.assignee, issue.labels.toString()]);\n    }\n  });\n  message+= \"</table>\";\n\n  hasRows = true;\n  issues.forEach(function(issue){\n    var active = issue.status_list.filter(function(status){\n      return status.field_value === \"Active\";\n    });\n    var active_time = active[0] && active[0].end_date - active[0].start_date > 0 ? active[0].end_date - active[0].start_date: 0;\n  \tif(active_time >= (15*86400000) && active_time < (30*86400000)) {\n\n      var url = \"<a href='\"+ base_url+issue.workitem_id +\"'>\"+ issue.workitem_id + \"</a>\";\n      if(hasRows) {\n        message += '<h3>User Stories - Active > 15 days</h3>';\n  \t\tmessage += '<table border=1 cellpadding=5 style=\"border-collapse: collapse; width:100%;\">';\n  \t\taddTableRow([\"Id\", \"Title\", \"Active Days\", \"Assignee\", \"Labels\"], true);\n        hasRows = false;\n      }\n      addTableRow([url, issue.summary, (active_time/86400000).toFixed(1) + \" days\", issue.assignee, issue.labels.toString()]);\n    }\n  });\n  message+= \"</table>\";\n\n  hasRows = true;\n  issues.forEach(function(issue){\n    var active = issue.status_list.filter(function(status){\n      return status.field_value === \"Active\";\n    });\n    var active_time = active[0] && active[0].end_date - active[0].start_date > 0 ? active[0].end_date - active[0].start_date: 0;\n  \tif(active_time >= (30*86400000)) {\n      var url = \"<a href='\"+ base_url+issue.workitem_id +\"'>\"+ issue.workitem_id + \"</a>\";\n      if(hasRows) {\n        message += '<h3>User Stories - Active > 30 days</h3>';\n\t\tmessage += '<table border=1 cellpadding=5 style=\"border-collapse: collapse; width:100%;\">';\n  \t\taddTableRow([\"Id\", \"Title\", \"Active Days\", \"Assignee\", \"Labels\"], true);\n        hasRows = false;\n      }\n      addTableRow([url, issue.summary, (active_time/86400000).toFixed(1) + \" days\", issue.assignee, issue.labels.toString()]);\n    }\n  });\n  message+= \"</table>\";\n  \n  message+= \"<p>Please click <a href=\" + \"https://eu1.app.propelo.ai/#/admin/dashboards/9?OU=\"+ org_unit.id +\"&workspace_id=2\" + \" target='_blank'>here</a> for more details. </p>\";\n  return { \n    state : 'success',\n    output : { \n      'message' :message\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 299,
+                    "y": 772
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Active > 6days",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "6": {
+                "id": "6",
+                "type": "email_notification",
+                "description": "Send an Email to a user",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "user_email": {
+                        "key": "user_email",
+                        "type": "multi-custom-dynamic-select",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "users",
+                        "search_field": "email",
+                        "display_name": "User Emails",
+                        "description": "Emails of the recipients. Select from the list, or use a variable (it may contain one or more emails, separated by commas).",
+                        "index": 10
+                    },
+                    "subject": {
+                        "key": "subject",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${3.item.name} - Workitems active for > 6 days",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Subject",
+                        "index": 20
+                    },
+                    "text": {
+                        "key": "text",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "${5.message}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "text",
+                        "description": "Text message to send",
+                        "index": 30
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 290,
+                    "y": 1252
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "Send Email notification",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "7": {
+                "id": "7",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "org_unit",
+                                    "value": "${3.item}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "prefix = 'hello ';\nfunction handleNode(context) {\n  var org_unit = JSON.parse(context.getParam(\"org_unit\"));\n  \n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'send_alert' : org_unit.tags.includes(\"4\")\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 302,
+                    "y": 458
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "check tags",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "8": {
+                "id": "8",
+                "type": "if_condition",
+                "description": "Evaluate condition",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "lql": {
+                        "key": "lql",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "${7.send_alert} = true",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "LQL",
+                        "description": "Use LevelOps Query Language to query the data",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "result": {
+                        "key": "result",
+                        "display_name": "result",
+                        "content_type": "boolean",
+                        "value_type": "string",
+                        "hidden": false
+                    }
+                },
+                "options": [
+                    "True",
+                    "False"
+                ],
+                "position": {
+                    "x": 300,
+                    "y": 552
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "has tags",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "9": {
+                "id": "9",
+                "type": "levelops_query",
+                "description": "Make a call to a Levelops Query",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "ignore_errors": {
+                        "key": "ignore_errors",
+                        "type": "radio-group",
+                        "values": [
+                            {
+                                "value": "Yes",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "default_value": "Yes",
+                        "display_name": "Ignore errors",
+                        "description": "If Yes, this node will succeed regardless of the API response",
+                        "index": 80
+                    },
+                    "headers": {
+                        "key": "headers",
+                        "type": "kv",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Headers",
+                        "index": 30
+                    },
+                    "path": {
+                        "key": "path",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "v1/tags/list",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Path",
+                        "description": "Path appended to the base URL",
+                        "index": 20
+                    },
+                    "password": {
+                        "key": "password",
+                        "type": "password_string",
+                        "values": [],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Api Key",
+                        "description": "Api key for Authentication to reach Levelops Query.",
+                        "index": 70
+                    },
+                    "integration_id": {
+                        "key": "integration_id",
+                        "type": "single-dynamic-select",
+                        "values": [],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "dynamic_resource_name": "integrations",
+                        "display_name": "Satellite Integration",
+                        "description": "Pick a satellite integration to make the call from. If not specified, LevelOps will only be able to reach public APIs.",
+                        "index": 60
+                    },
+                    "content_type": {
+                        "key": "content_type",
+                        "type": "text",
+                        "values": [
+                            {
+                                "value": "application/json",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Content Type",
+                        "description": "Content type of the body (for example: \"application/json\")",
+                        "index": 40
+                    },
+                    "method": {
+                        "key": "method",
+                        "type": "single-select",
+                        "values": [
+                            {
+                                "value": "POST",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "default_value": "GET",
+                        "display_name": "Method",
+                        "index": 10
+                    },
+                    "body": {
+                        "key": "body",
+                        "type": "text-area",
+                        "values": [
+                            {
+                                "value": "{\"filter\":{\"tag_ids\": ${3.item.tags}}}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Body",
+                        "index": 50
+                    }
+                },
+                "output": {
+                    "body": {
+                        "key": "body",
+                        "display_name": "body",
+                        "hidden": false
+                    },
+                    "code": {
+                        "key": "code",
+                        "display_name": "code",
+                        "hidden": false
+                    },
+                    "json_body": {
+                        "key": "json_body",
+                        "display_name": "json_body",
+                        "value_type": "json_blob",
+                        "hidden": false
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 297,
+                    "y": 891
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "get tags",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "10": {
+                "id": "10",
+                "type": "for_each",
+                "description": "Iterate over items in a given list variable",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "list": {
+                        "key": "list",
+                        "type": "variable-select",
+                        "values": [
+                            {
+                                "value": "${11.emails}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "list",
+                        "description": "Select a variable that contains a list of items",
+                        "index": 10
+                    }
+                },
+                "output": {
+                    "item": {
+                        "key": "item",
+                        "display_name": "item",
+                        "value_type": "json_blob",
+                        "hidden": false,
+                        "content_type_from_input": "list",
+                        "content_type": "json_blob"
+                    }
+                },
+                "options": [],
+                "position": {
+                    "x": 295,
+                    "y": 1137
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "For Each email",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            },
+            "11": {
+                "id": "11",
+                "type": "script",
+                "description": "Custom logic using JavaScript",
+                "ports": {
+                    "input": {
+                        "id": "input",
+                        "type": "input",
+                        "properties": {
+                            "action": "input"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 0
+                        }
+                    },
+                    "output": {
+                        "id": "output",
+                        "type": "output",
+                        "properties": {
+                            "action": "output"
+                        },
+                        "position": {
+                            "x": 131,
+                            "y": 78
+                        }
+                    }
+                },
+                "input": {
+                    "parameters": {
+                        "key": "parameters",
+                        "type": "kv",
+                        "values": [
+                            {
+                                "value": {
+                                    "key": "tags",
+                                    "value": "${9.json_body.records}"
+                                },
+                                "type": "json"
+                            }
+                        ],
+                        "required": false,
+                        "hidden": false,
+                        "options": [],
+                        "display_name": "Input Parameters",
+                        "description": "Specify input parameters that will be available within the script.",
+                        "index": 10
+                    },
+                    "script": {
+                        "key": "script",
+                        "type": "text-editor",
+                        "values": [
+                            {
+                                "value": "\nfunction handleNode(context) {\n  var tags = JSON.parse(context.getParam('tags'));\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  var emails = [];\n  \n  tags.forEach(function(tag){\n    if(tag.name.toLowerCase().includes(\"mailto\")) {\n      var mail = tag.name.toString().split(\":\");\n      var mailid = mail.length && mail[1] && (mail[1].length > 0) > 0? mail[1]: \"\"; \n      emails.push(mailid);\n    }\n  });\n  \n  return { \n    state : 'success',\n    output : { \n      'emails' : emails\n    } \n  };\n}",
+                                "type": "string"
+                            }
+                        ],
+                        "required": true,
+                        "hidden": false,
+                        "options": [],
+                        "default_value": "prefix = 'hello ';\nfunction handleNode(context) {\n  name = context.getParam('name');\n  // levelops.serviceName().doSomething() - invoke a levelops service\n  return { \n    state : 'success',\n    output : { \n      'message' : prefix + name  \n    } \n  };\n}",
+                        "display_name": "Script",
+                        "description": "Write some custom logic using JavaScript.",
+                        "index": 20
+                    }
+                },
+                "output": {},
+                "options": [],
+                "position": {
+                    "x": 296,
+                    "y": 1027
+                },
+                "properties": {
+                    "icon": "levelops"
+                },
+                "name": "get emails",
+                "size": {
+                    "width": 320,
+                    "height": 124
+                }
+            }
+        },
+        "links": {
+            "01b82d6a-ec47-4171-8924-1d6594517cac": {
+                "id": "01b82d6a-ec47-4171-8924-1d6594517cac",
+                "from": {
+                    "nodeId": "5",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "9",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "e36720d6-02d8-4b16-b977-5e54052728e5": {
+                "id": "e36720d6-02d8-4b16-b977-5e54052728e5",
+                "from": {
+                    "nodeId": "9",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "11",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "d8b1f56f-5904-461c-8e38-fedf7c337cf1": {
+                "id": "d8b1f56f-5904-461c-8e38-fedf7c337cf1",
+                "from": {
+                    "nodeId": "11",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "10",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "9dcc270c-f068-4673-a715-26a890e8c4f4": {
+                "id": "9dcc270c-f068-4673-a715-26a890e8c4f4",
+                "from": {
+                    "nodeId": "2",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "1",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "3535ef73-3843-46d7-bde4-62b8f35be5a3": {
+                "id": "3535ef73-3843-46d7-bde4-62b8f35be5a3",
+                "from": {
+                    "nodeId": "10",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "6",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "81b1f63c-88b7-44f7-b64b-d06d26c13db9": {
+                "id": "81b1f63c-88b7-44f7-b64b-d06d26c13db9",
+                "from": {
+                    "nodeId": "0",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "2",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "3feee9f8-ae63-46e7-a4c3-934a1de94a82": {
+                "id": "3feee9f8-ae63-46e7-a4c3-934a1de94a82",
+                "from": {
+                    "nodeId": "3",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "7",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "2c2d659e-4f70-451c-bfb2-df4fd8a7e36e": {
+                "id": "2c2d659e-4f70-451c-bfb2-df4fd8a7e36e",
+                "from": {
+                    "nodeId": "4",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "5",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "ad870310-5e40-4536-b5a7-c4bcf01eaa73": {
+                "id": "ad870310-5e40-4536-b5a7-c4bcf01eaa73",
+                "from": {
+                    "nodeId": "7",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "8",
+                    "portId": "input"
+                },
+                "properties": {}
+            },
+            "fdea8e01-5a9f-41d1-a094-542b0e0f824d": {
+                "id": "fdea8e01-5a9f-41d1-a094-542b0e0f824d",
+                "from": {
+                    "nodeId": "8",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "4",
+                    "portId": "input"
+                },
+                "properties": {
+                    "option": "True"
+                }
+            },
+            "7c2ada05-a778-41fd-8715-28fa474ada9c": {
+                "id": "7c2ada05-a778-41fd-8715-28fa474ada9c",
+                "from": {
+                    "nodeId": "1",
+                    "portId": "output"
+                },
+                "to": {
+                    "nodeId": "3",
+                    "portId": "input"
+                },
+                "properties": {}
+            }
+        }
+    }
+}
